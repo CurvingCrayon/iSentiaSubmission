@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./static/styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="/libraries/angular.js"></script>
+    
+
+</head>
+<body ng-app="pickr">
+<div ng-controller="ArtGenerator">
+<div class="container-fluid">
+    <div class="row">
+        <h1>pickr</h1>
+    </div>
+
+    <div class="row justify-content-around" id="cardHolder">
+        <div ng-repeat="card in feed" class="card shadow-lg my-2 min-h-50 d-flex"> 
+            <!--col-xl-3 col-lg-4 col-sm-2 col-xs-1-->
+                <div class="card-head align-top">
+                    <h3 class="card-title">{{card.title}}<i style="color:gray;" ng-show="card.title.trim() === ''">Untitled</i></h2>
+                </div>
+                <div class="card-image flex-grow-1 justify-content-end" style="background-image:url('{{card.imageURL}}');">
+                    <button ng-click="focusImage($index)" class="btn btn-secondary fullscreen-btn" data-toggle="modal" data-target="#gallery">
+                        <i class="material-icons align-middle">fullscreen</i>
+                    </button>
+                </div>
+                
+                <div class="card-body align-bottom flex-grow-0">
+                    <p class="card-text">
+                        By <a href="{{card.author.link}}">{{card.author.name}}</a><br/>
+                        Published {{card.date}}
+                    </p>
+                    <a href="{{card.imageLink}}" target="_blank" class="btn btn-primary">View in Flickr</a>
+                </div>
+        </div>
+        
+    </div>
+    <div class="row">
+            <button ng-click="createFeed()" class="btn btn-outline-primary">Get Feed!</button>
+    </div>
+    <div id="gallery" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{focus.title}}<i style="color:gray;" ng-show="focus.title.trim() === ''">Untitled</i></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <img class="focus-image" ng-src="{{focus.imageURL}}" />
+                </div>
+                <div class="modal-footer">
+                    <p>
+                        By <a href="{{focus.author.link}}">{{focus.author.name}}</a><br/>
+                        Published {{focus.date}}
+                    </p>
+                    <a href="{{focus.imageLink}}" target="_blank" class="btn btn-primary align-middle">View in Flickr</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="alert-holder">
+        <div ng-repeat="err in errors" class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{err}}
+            <button type="button" class="close" ng-click="closeAlert($index);">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+    
+    <script src="/libraries/jquery-3.3.1.min.js"></script>
+    <script src="/static/scroller.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+    <script src="/Angular/app.js"></script>
+    <script src="/Angular/service.js"></script>
+    <script src="/Angular/controller.js"></script>
+    <script src="/Angular/script.js"></script>
+        
+    
+</body>
+</html>
