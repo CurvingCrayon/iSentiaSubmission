@@ -1,6 +1,6 @@
 var received = false;
 var pollTimer = 100;
-function request(){
+function request(){ //Deprecated! Now found in service.js
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

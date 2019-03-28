@@ -6,11 +6,15 @@ app.factory("node",["$http",function($http){
             //return data.data;
             if(data.data === "received"){ //If successfully received
                 return new Promise(function(resolve,reject){ //Tell the parent to wait for the promise of the request being fully processed
-                    setInterval(function(){ //Continually poll the status of the feed request
+                    var pollTicket = setInterval(function(){ //Continually poll the status of the feed request
                        $http.get("/poll")
                         .then(function(data){
                             if(data.data !== "false"){ //If poll doesn't return "false" flag
+                                if(data.data === "error"){
+                                    
+                                }
                                 resolve(data.data); //Resolve the promise with its data
+                                clearInterval(pollTicket);
                             }
                         },
                         function(err){

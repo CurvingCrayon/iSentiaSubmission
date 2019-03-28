@@ -41,17 +41,18 @@ app.get("/poll",function(req,res){
     res.sendFile("index.html",fileOptions,function(){
         
     })
+    console.log("Index loaded");
 }).get("/request",function(req,res){
-    flickr.sendRequest(options, function(status, XMLfeed){
-        
+    console.log("Flickr request received.");
+    flickr.sendRequest(options, function(status, responseText){
         if(status == 200){
-            parseString(XMLfeed, handleXML);
+            parseString(responseText, handleXML); //Equivalent to handleXML(parseString(responseText))
             res.send("received");
         }
         else{
-            res.send("error");
+            handleError(responseText);
         }
-        
+
     });
     
 }).get("/:folder/:file",function(req,res){
@@ -73,9 +74,10 @@ app.get("/poll",function(req,res){
                 'x-sent': true
             }
         }
-        res.sendFile(req.params.file,fileOptions,function(err){
-            console.log(err);
-        });
+        res.sendFile(req.params.file,fileOptions,
+            function(err){
+            }
+        );
     }
     else{
         res.status(404);
@@ -83,8 +85,12 @@ app.get("/poll",function(req,res){
 });
 
 function handleXML(err, feedObj){
-    var entries = flickr.parseFeedObject(feedObj);
+    var entries = flickr.formatFeedObject(feedObj);
     requestPayload = JSON.stringify(entries);
+    requestStatus = true;
+}
+function handleError(errorText){
+    requestPayload = errorText;
     requestStatus = true;
 }
 

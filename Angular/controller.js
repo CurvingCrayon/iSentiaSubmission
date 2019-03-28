@@ -1,11 +1,15 @@
 app.controller("ArtGenerator",["$scope","node",function($scope, node){
+    $scope.allowRequest = true; //Defines whether the "get feed" button is enabled
+
     $scope.feed = [];
     $scope.createFeed = function(){
+        $scope.allowRequest = false;
         node().then(function(data){
             console.log(data);
-            $scope.feed.concat($scope.feed,data)
+            $scope.feed = $scope.feed.concat(data);
+            $scope.allowRequest = true;
         },function(err){
-            //$scope.
+            $scope.createError(err);
         });
         
     }

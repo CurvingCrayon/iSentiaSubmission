@@ -7,14 +7,14 @@ var offMessage = "All requests finished";
 
 var flickrCategoryLink = "https://www.flickr.com/photos/tags/";
 
-exports.parseFeedObject = function(feedObj) {
+exports.formatFeedObject = function(feedObj) {
     var entries = feedObj.feed.entry;
     var newEntries = [];
     for(var e = 0; e < entries.length; e++){ //Loop through feed entries
         var entry = entries[e];
         console.log(entry);
         //Convert date into string
-        //Mar 21 2019
+        //e.g. Mar 21 2019
         var publishDate = Date(entry.published[0]).split(" ").splice(1,3).join(" ");
         var details = { //Create clean object for metadata based on feed structure (see above comment)
             author: {
@@ -48,23 +48,25 @@ exports.sendRequest = function(options, onResponse){ //Sends request using optio
         protocol = https;
     }
     
-    var req = protocol.request(options, function(res){ //Send request based on parameters and callback
+    var req = protocol.request(options, function(res, err){ //Send request based on parameters and callback
         var responseText = "";
         
         res.setEncoding("utf8");
         
         res.on("data", function (chunk) {
             responseText += chunk;
-            console.log("chunk loaded");
+            console.log("chunk loaded"); //Load each chunk into the responseText vairable
         });
 
         res.on("end", function() {
             console.log("response ended");
-            onResponse(res.statusCode, responseText);
+            onResponse(res.statusCode, responseText); //End with the responseText 
         });
     });
 
     req.on("error", function(err) {
+        console.log("Flickr API not responding");
+        onResponse(-1,"Flickr API not responding")
     });
     
     //req.on("response",function(){console.log("RESPONSE RECEIVED")});
