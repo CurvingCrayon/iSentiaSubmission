@@ -2,7 +2,7 @@ var http = require("http");
 var https = require("https");
 
 var offMessage = "All requests finished";
-
+var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Nov","Dec"]
 
 
 var flickrCategoryLink = "https://www.flickr.com/photos/tags/";
@@ -12,9 +12,11 @@ exports.formatFeedObject = function(feedObj) {
     var newEntries = [];
     for(var e = 0; e < entries.length; e++){ //Loop through feed entries
         var entry = entries[e];
-        //Convert date into string
-        //e.g. Mar 21 2019
-        var publishDate = Date(entry.published[0]).split(" ").splice(1,3).join(" ");
+        //Extract numbers from date string, e.g. ["2019","03","28"]
+        var dateParts = entry.published[0].split("T")[0].split("-").splice(0,3);
+        //Convert month from number to abbreviated name e.g. "Mar"
+        dateParts[1] = months[Number(dateParts[1])-1];
+        var publishDate = dateParts[1] + " " + dateParts[2] + " " +dateParts[0]; //Join parts together
         var details = { //Create clean object for metadata based on feed structure (see above comment)
             author: {
                 thumbnail: entry.author[0]["flickr:buddyicon"][0],
