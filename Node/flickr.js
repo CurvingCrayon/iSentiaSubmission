@@ -12,7 +12,6 @@ exports.formatFeedObject = function(feedObj) {
     var newEntries = [];
     for(var e = 0; e < entries.length; e++){ //Loop through feed entries
         var entry = entries[e];
-        console.log(entry);
         //Convert date into string
         //e.g. Mar 21 2019
         var publishDate = Date(entry.published[0]).split(" ").splice(1,3).join(" ");
