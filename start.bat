@@ -1,1 +1,1 @@
-node --inspect ./Node/main.js
+node ./Node/main.js
