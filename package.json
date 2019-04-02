@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "angular-mocks": "^1.7.8",
     "express": "^4.16.4",
     "flickrapi": "^0.6.0",
     "fs": "0.0.1-security",
@@ -12,7 +13,11 @@
     "jest": "^24.5.0",
     "xml2js": "^0.4.19"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest-cli": "^24.5.0",
+    "nock": "^10.0.6",
+    "request": "^2.88.0"
+  },
   "scripts": {
     "test": "jest"
   },
