@@ -4,9 +4,13 @@ Written using NodeJS and the Twitter Bootstrap.
 ## Launching
 * Clone
 ```
+npm install
+```
+```
+Then
 node ./Node/main.js
 ```
-###OR
+####OR
 Run start.bat
 
 ##Test
