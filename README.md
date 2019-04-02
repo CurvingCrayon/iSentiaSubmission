@@ -6,14 +6,14 @@ Written using NodeJS and the Twitter Bootstrap.
 ```
 npm install
 ```
-```
 Then
+```
 node ./Node/main.js
 ```
-####OR
+#### OR
 Run start.bat
 
-##Test
+## Test
 ```
 npm test
 ```
