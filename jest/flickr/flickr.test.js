@@ -8,5 +8,5 @@ var fs = require("fs");
 
 test("formats Flickr feed object correctly", async () => {
     var formatted = flickr.formatFeedObject(input.data);
-    expect(formatted).toBe(output.data);
+    expect(formatted).toEqual(output.data);
 });
