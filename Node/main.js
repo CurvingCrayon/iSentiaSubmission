@@ -30,6 +30,7 @@ app.get("/poll",function(req,res){
     newPath.pop();
     newPath = newPath.join("/");
     newPath += "/";
+    newPath = "."+newPath;
     var fileOptions = {
         root: newPath,
         dotfiles: 'deny',
@@ -66,6 +67,7 @@ app.get("/poll",function(req,res){
         var newPath = __dirname.split("\\");
         newPath.pop();
         newPath = newPath.join("/")+"/"+req.params.folder;
+        newPath = "."+newPath;
         var fileOptions = {
             root: newPath,
             dotfiles: 'deny',
