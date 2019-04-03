@@ -6,6 +6,7 @@ Written using NodeJS and the Twitter Bootstrap.
 ```
 npm install
 ```
+
 Then
 ```
 node ./Node/main.js
@@ -13,6 +14,7 @@ node ./Node/main.js
 #### OR
 Run start.bat
 
+Then navigate to localhost:8000
 ## Test
 ```
 npm test
